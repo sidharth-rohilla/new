@@ -1,0 +1,136 @@
+/* ================================= */
+/* PREMIUM SPORTS NAVBAR */
+/* ================================= */
+
+.navbar {
+  width: 100%;
+  padding: 18px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Glass Effect */
+  background: rgb(0, 0, 0);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(to right, #00c6ff, #ff4b2b);
+  border-image-slice: 1;
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ================================= */
+/* LOGO */
+/* ================================= */
+
+.navbar-logo {
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  background: linear-gradient(to right, #00c6ff,white, #ff4b2b); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+}
+
+/* ================================= */
+/* NAV LINKS */
+/* ================================= */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+/* Glow hover effect */
+.nav-links a:hover {
+  color: #00c6ff;
+  text-shadow: 0 0 10px #00c6ff;
+}
+
+/* Animated underline */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -6px;
+  background: linear-gradient(to right, #00c6ff, #ff4b2b);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ================================= */
+/* ACTIVE LINK */
+/* ================================= */
+
+.active-link {
+  color: #ff4b2b;
+  font-weight: bold;
+}
+
+/* ================================= */
+/* CTA BUTTON */
+/* ================================= */
+
+.nav-btn {
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: white;
+
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  transition: 0.4s ease;
+}
+
+.nav-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 65, 108, 0.5);
+}
+
+/* ================================= */
+/* MOBILE RESPONSIVE */
+/* ================================= */
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  .nav-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

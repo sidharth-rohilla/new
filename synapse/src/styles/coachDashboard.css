@@ -1,0 +1,206 @@
+/* ===================================== */
+/* COACH DASHBOARD - SPORTS ADMIN PANEL */
+/* ===================================== */
+
+.coach-dashboard {
+  min-height: 100vh;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
+  padding: 40px;
+}
+
+/* ===================================== */
+/* HEADER */
+/* ===================================== */
+
+.coach-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.coach-header h2 {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* ===================================== */
+/* ANALYTICS CARDS */
+/* ===================================== */
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.analytics-card {
+  background: #1f2f46;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  transition: 0.3s ease;
+}
+
+.analytics-card:hover {
+  transform: translateY(-8px);
+  background: #2f4a6b;
+}
+
+.analytics-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #4da6ff;
+}
+
+.analytics-card p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* ===================================== */
+/* TALENT MAP SECTION */
+/* ===================================== */
+
+.talent-section {
+  margin-top: 20px;
+}
+
+.talent-section h3 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.talent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.player-card {
+  background: #1f2f46;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  transition: 0.3s ease;
+}
+
+.player-card:hover {
+  transform: translateY(-8px);
+  background: #2f4a6b;
+}
+
+.player-card h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #00c6ff;
+}
+
+.player-card p {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+/* ===================================== */
+/* ACTION BUTTONS */
+/* ===================================== */
+
+.card-buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.card-buttons button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.watch-btn {
+  background-color: #ff9800;
+  color: white;
+}
+
+.watch-btn:hover {
+  background-color: #e68900;
+}
+
+.invite-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.invite-btn:hover {
+  background-color: #1e7e34;
+}
+
+.profile-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.profile-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ===================================== */
+/* WATCHLIST SECTION */
+/* ===================================== */
+
+.watchlist-section {
+  margin-top: 50px;
+}
+
+.watchlist-section h3 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+/* ===================================== */
+/* SEARCH BAR */
+/* ===================================== */
+
+.search-bar {
+  margin-bottom: 30px;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 280px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+/* ===================================== */
+/* RESPONSIVE DESIGN */
+/* ===================================== */
+
+@media (max-width: 768px) {
+  .coach-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .talent-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-buttons {
+    flex-direction: column;
+  }
+}
