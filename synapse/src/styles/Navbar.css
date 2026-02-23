@@ -23,8 +23,8 @@
 /* Transparent Style (For Login Page) */
 .nav-transparent {
   position: absolute;
-  background: transparent;
-  border: none;
+  background: rgba(0, 0, 0, 0.911);
+  border-bottom:blue;
 }
 
 .nav-container {

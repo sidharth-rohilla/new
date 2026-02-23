@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Login.css";
-import sportsGif from "../assets/new.gif";   // ✅ Import GIF properly
+import sportsGif from "../assets/new.gif";   // 
 
 function Login() {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });  // ✅ fixed
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });  
   };
 
   const handleSubmit = (e) => {

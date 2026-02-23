@@ -19,7 +19,7 @@ function Navbar() {
       <div className="nav-container">
         <div className="navbar-logo">
           <Link to="/" onClick={closeMenu}>
-            <span className="logo-sports">Sports</span>
+            <span className="logo-sports">Brigde</span>
             <span className="logo-talent">Talent</span>
           </Link>
         </div>

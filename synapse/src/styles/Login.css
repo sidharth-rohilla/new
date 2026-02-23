@@ -3,12 +3,13 @@
   display: flex;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
-  overflow: hidden;
+  background-color: #ffffff;
+  overflow-x: hidden;
 }
 
-/* --- Left Side (Video Container) --- */
+/* --- Left Side (Video/Branding) --- */
 .login-left {
-  flex: 1.2; /* Slightly wider for the visual impact */
+  flex: 1.2;
   position: relative;
   display: flex;
   align-items: center;
@@ -17,9 +18,10 @@
   padding: 40px;
   text-align: center;
   overflow: hidden;
+  background-color: #0f172a; /* Fallback color */
 }
 
-.login-bg-video {
+.login-bg-video, .background-gif {
   position: absolute;
   top: 0;
   left: 0;
@@ -29,48 +31,48 @@
   z-index: 1;
 }
 
-/* The Blue Tint Overlay */
 .video-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.8), rgba(30, 64, 175, 0.6));
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(15, 23, 42, 0.9));
   z-index: 2;
 }
 
 .branding-content {
   position: relative;
   z-index: 3;
+  width: 100%;
+  max-width: 500px;
 }
 
 .video-badge {
   background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
   padding: 8px 16px;
   border-radius: 20px;
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  letter-spacing: 1px;
 }
 
 .branding-content h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem); /* Scales smoothly between mobile and desktop */
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 20px;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .branding-content p {
-  font-size: 1.2rem;
-  max-width: 450px;
-  margin: 0 auto;
-  opacity: 0.95;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  line-height: 1.5;
 }
 
 /* --- Right Side (White Form) --- */
@@ -80,48 +82,51 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 40px 20px;
   z-index: 10;
 }
 
 .login-form-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
 }
 
 .login-form-container h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: #1e293b;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .subtitle {
   color: #64748b;
   margin-bottom: 30px;
+  font-size: 0.95rem;
 }
 
 .input-group {
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
 }
 
 .input-group label {
-  font-size: 0.9rem;
-  font-weight: 600;
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
   margin-bottom: 8px;
   color: #1e293b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .input-group input {
-  padding: 14px 18px;
+  width: 100%;
+  padding: 14px 16px;
   background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
   font-size: 1rem;
   outline: none;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .input-group input:focus {
@@ -132,16 +137,16 @@
 
 .login-btn {
   width: 100%;
-  padding: 15px;
+  padding: 16px;
   background-color: #2563eb;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   margin-top: 10px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .login-btn:hover {
@@ -150,10 +155,14 @@
   box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
 }
 
+.login-btn:active {
+  transform: translateY(0);
+}
+
 .signup-redirect {
   text-align: center;
   margin-top: 30px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #64748b;
 }
 
@@ -163,41 +172,57 @@
   text-decoration: none;
 }
 
-/* --- Mobile View --- */
-@media (max-width: 900px) {
-  .login-page { flex-direction: column; }
-  .login-left { min-height: 40vh; }
-  .branding-content h1 { font-size: 2.2rem; }
+/* --- RESPONSIVE BREAKPOINTS --- */
+
+@media (max-width: 1024px) {
+  .branding-content h1 { font-size: 2.8rem; }
 }
 
-.login-left {
-  position: relative;
-  width: 50%;
-  height: 100vh;
-  overflow: hidden;
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column; /* Stacked vertically */
+  }
+
+  .login-left {
+    margin-top: 1rem;
+    flex: none;
+    height: 35vh; /* Video takes top 35% of screen */
+    padding: 20px;
+  }
+
+  .branding-content h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .branding-content p {
+    font-size: 0.9rem;
+    display: none; /* Hide description on small mobile to save space */
+  }
+
+  .video-badge {
+    margin-bottom: 10px;
+    font-size: 0.65rem;
+  }
+
+  .login-right {
+    flex: 1;
+    padding: 40px 20px;
+    border-radius: 30px ; /* Rounded top corners for "Sheet" effect */
+    margin-top: -30px; /* Overlaps the video slightly */
+    position: relative;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.938);
+    width: 80%;
+    margin: 2.3rem;
+  }
+
+  .login-form-container h2 {
+    font-size: 1.5rem;
+  }
 }
 
-.background-gif {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.video-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 50, 0.5);
-  z-index: 1;
-}
-
-.branding-content {
-  position: relative;
-  z-index: 2;
-  color: white;
-  padding: 50px;
+@media (max-height: 700px) and (max-width: 768px) {
+    /* Adjustments for shorter phones */
+    .login-left { height: 30vh; }
+    .subtitle { margin-bottom: 15px; }
 }
