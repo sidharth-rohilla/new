@@ -307,3 +307,126 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
+/* for mobile */
+/* --- ADVANCED MOBILE RESPONSIVENESS --- */
+
+@media (max-width: 768px) {
+  /* 1. Navbar Adjustments */
+  .navbar {
+    padding: 1rem 5%;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    display: none; /* Hide standard links or use a hamburger menu */
+    /* If you want to keep them visible but small, use: 
+    gap: 15px; 
+    font-size: 0.8rem; */
+  }
+
+  /* 2. Hero Section Scaling */
+  .hero-split {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 5%;
+    gap: 40px;
+    min-height: auto;
+  }
+
+  .hero-content h1 {
+    font-size: 2.2rem; /* Scaled down from 3.5rem */
+    line-height: 1.1;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    margin: 0 auto 30px;
+  }
+
+  .primary-btn {
+    width: 100%; /* Full width buttons are easier to tap on mobile */
+    padding: 15px 0;
+  }
+
+  /* 3. Video & AI Effects Optimization */
+  .video-wrapper {
+    max-width: 100%;
+    border-radius: 20px; /* Slightly smaller radius for small screens */
+  }
+
+  /* Make data points smaller so they don't block the view */
+  .data-point {
+    width: 8px;
+    height: 8px;
+  }
+
+  .data-point span {
+    font-size: 8px;
+    padding: 2px 5px;
+  }
+
+  /* AI Status Box - Move to top left to avoid blocking faces in video */
+  .ai-status-box {
+    top: 10px;
+    right: 10px;
+    padding: 5px 8px;
+    font-size: 8px;
+  }
+
+  /* The small overlay video box needs to be smaller on mobile */
+  .ai-overlay-video-box {
+    width: 120px;
+    height: 75px;
+    bottom: 10px;
+    right: 10px;
+    border-width: 1px;
+  }
+
+  /* 4. Features Grid */
+  .features-section {
+    padding: 60px 5%;
+  }
+
+  .feature-card {
+    padding: 30px 20px;
+  }
+
+  /* 5. Footer Scaling */
+  .footer-container {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .footer-section h4 {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  /* Hide decorative AI points on very small screens to keep it clean */
+  .point-3 {
+    display: none;
+  }
+
+  .logo-sports, .logo-talent {
+    font-size: 1.2rem;
+  }
+}
+
+/* --- Added Touch Improvements --- */
+@media (hover: none) {
+  /* Disable hover transforms on touch devices to prevent "sticky" clicks */
+  .feature-card:hover, .primary-btn:hover {
+    transform: none;
+  }
+  
+  .ai-overlay-video-box:hover {
+    transform: none;
+  }
+}

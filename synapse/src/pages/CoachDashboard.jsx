@@ -52,7 +52,7 @@ function CoachDashboard() {
       <section className="coach-hero-card">
         <div className="coach-hero-content">
           <div className="coach-avatar-large">
-             <img src={coach.profilePic || "https://via.placeholder.com/150"} alt="Coach" />
+             <img src={coach.profilePic || "https://media.istockphoto.com/id/1225695062/photo/young-indian-businessman-stock-photo.webp?s=1024x1024&w=is&k=20&c=X53Ft4D-x-W0DqsI26IVeBjFTJbhgSKqrSBkavLKhI4="} alt="Coach" />
           </div>
           <div className="coach-info">
             <h1>Coach {coach.username}</h1>
@@ -61,8 +61,10 @@ function CoachDashboard() {
         </div>
         <button className="logout-minimal" onClick={() => { localStorage.clear(); navigate("/login"); }}>Logout</button>
       </section>
-
-      <h2 className="section-label">Analysis of Players</h2>
+      <br />
+      <hr />
+      <br />
+      <h2 className="section-label">Top Three Performers</h2>
 
       {/* 2. TOP 3 PODIUM SECTION */}
       <section className="podium-section">
@@ -87,17 +89,20 @@ function CoachDashboard() {
           );
         })}
       </section>
-
+      <br />
+      <hr />
+      <br />
       <h2 className="section-label">Leaderboard</h2>
 
       {/* 3. LEADERBOARD GRID SECTION */}
       <section className="leaderboard-grid">
         {remainingPlayers.map((player) => (
           <div className="grid-item-card" key={player.id}>
-            <div className="grid-avatar"></div>
             <h4>{player.username}</h4>
             <p>{player.sport}</p>
             <div className="grid-score">{player.score}%</div>
+            <button className="btn-analysis">Analysis</button>
+            <button className="btn-invite">Invite</button>
           </div>
         ))}
       </section>

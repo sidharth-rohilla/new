@@ -276,9 +276,27 @@
 
 .section-label {
   margin: 40px 0 20px;
-  font-size: 1.2rem;
-  color: #555;
-  text-transform: lowercase;
+  color: #1d4ed8;
+  font-size: 2rem;
+  font-weight: bolder;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.section-label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px; /* space below text */
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(to right, #2563eb, #0f172a);
+  transition: width 0.4s ease;
+}
+
+.section-label:hover::after {
+  width: 100%;
 }
 
 /* Coach Profile Card */
@@ -290,6 +308,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: 0.8s ease;
+}
+
+.coach-hero-card:hover{
+  box-shadow: 0px 0px 10px black;
 }
 
 .coach-hero-content {
@@ -333,18 +356,33 @@
   height: 380px;
   z-index: 2;
   border: 2px solid #ffd700;
+  transition: box-shadow 0.5s ease;
+}
+
+.podium-card.gold:hover{
+  box-shadow: 0px 0px 20px orange;
 }
 
 .podium-card.silver {
   background: linear-gradient(135deg, #f2f2f2 0%, #cfcfcf 100%);
   height: 320px;
+  transition: box-shadow 0.5s ease;
+}
+
+
+.podium-card.silver:hover{
+  box-shadow: 0px 0px 20px rgb(151, 202, 223);
 }
 
 .podium-card.bronze {
   background: linear-gradient(135deg, #fff2e6 0%, #e6b38a 100%);
   height: 300px;
+  transition: box-shadow 0.5s ease;
 }
 
+.podium-card.bronze:hover{
+  box-shadow: 0px 0px 20px rgb(221, 81, 16);
+}
 .crown-icon {
   font-size: 2rem;
   position: absolute;
@@ -381,18 +419,15 @@
 
 .grid-item-card {
   background: white;
-  border: 1px solid #eee;
+  border: 1px solid #3177df;
+  box-shadow: 0px 4px 10px rgba(19, 18, 41, 0.705);
   padding: 20px;
   border-radius: 15px;
   text-align: center;
 }
 
-.grid-avatar {
-  width: 60px;
-  height: 60px;
-  background: #eee;
-  border-radius: 12px;
-  margin: 0 auto 15px;
+.grid-item-card:hover {
+ box-shadow: 4px 8px 10px rgba(1, 0, 7, 0.836);
 }
 
 .grid-score {
@@ -402,9 +437,110 @@
 }
 
 .logout-minimal {
-  background: none;
-  border: 1px solid #ccc;
+  background: lightseagreen;
+  border: 1px solid #09859b;
   padding: 5px 15px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+
+/* for mobile  */
+/* --- MOBILE RESPONSIVENESS --- */
+
+@media (max-width: 768px) {
+  /* General Layout */
+  .coach-dashboard-wrapper {
+    padding: 1rem;
+  }
+
+  /* Header adjustments */
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+
+  .coach-profile-section {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Coach Hero Card (Profile section) */
+  .coach-hero-card {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .coach-hero-content {
+    flex-direction: column;
+  }
+
+  /* Podium Section - Stacked vertically for small screens */
+  .podium-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* Space for the crown icon */
+    margin-top: 40px;
+  }
+
+  .podium-card.gold, 
+  .podium-card.silver, 
+  .podium-card.bronze {
+    width: 100%;
+    height: auto; /* Remove fixed heights */
+    padding: 40px 20px 20px;
+  }
+
+  /* Re-ordering Podium so Gold appears first on mobile */
+  .podium-card.gold { order: 1; }
+  .podium-card.silver { order: 2; }
+  .podium-card.bronze { order: 3; }
+
+  /* Leaderboard Grid - Switch from 4 columns to 1 or 2 */
+  .leaderboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  /* Responsive Table - Allow horizontal scroll */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .leaderboard-table {
+    min-width: 600px; /* Forces scroll instead of squishing text */
+  }
+
+  /* Section Title scaling */
+  .section-label {
+    font-size: 1.5rem;
+    margin: 30px 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smaller buttons and text for tiny screens */
+  .top-three-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modern-player-card {
+    max-width: 100%;
+  }
+
+  .coach-meta h1 {
+    font-size: 1.2rem;
+  }
+
+  .logout-btn {
+    width: 100%;
+  }
+
+  .podium-actions {
+    flex-direction: column;
+  }
 }
