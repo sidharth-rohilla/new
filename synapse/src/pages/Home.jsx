@@ -24,9 +24,8 @@ function Home() {
             ) : (
               <div className="btn-group">
                 <Link to="/signup">
-                  <button className="primary-btn">Sign up as coach/player</button>
+                  <button className="primary-btn">Get Started</button>
                 </Link>
-                <button className="secondary-btn">Watch Demo</button>
               </div>
             )}
           </div>

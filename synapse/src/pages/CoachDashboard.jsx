@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/CoachDashboard.css";
+import "../styles/coachDashboard.css";
 
 const DUMMY_PLAYERS = [
-  { id: "d1", username: "Marcus Johnson", sport: "Basketball", role: "Point Guard", score: 98.4, status: "Top Talent", location: "Chicago, IL", trend: "+2.5%" },
-  { id: "d2", username: "Elena Rodriguez", sport: "Soccer", role: "Forward", score: 95.2, status: "Scouted", location: "Madrid, ES", trend: "+1.2%" },
-  { id: "d3", username: "David Chen", sport: "Swimming", role: "Freestyle", score: 92.8, status: "Available", location: "Toronto, CA", trend: "+4.1%" },
-  { id: "d4", username: "Sarah Miller", sport: "Volleyball", role: "Setter", score: 89.5, status: "Watchlist", location: "Miami, FL", trend: "-0.5%" },
+  { id: "d1", username: "Marcus Johnson", sport: "Basketball", score: 98.4, location: "Chicago, IL" },
+  { id: "d2", username: "Elena Rodriguez", sport: "Soccer", score: 95.2, location: "Madrid, ES" },
+  { id: "d3", username: "David Chen", sport: "Swimming", score: 92.8, location: "Toronto, CA" },
+  { id: "d4", username: "Sarah Miller", sport: "Volleyball", score: 89.5, location: "Miami, FL" },
+  { id: "d5", username: "James Wilson", sport: "Tennis", score: 88.2, location: "London, UK" },
+  { id: "d6", username: "Anna Scott", sport: "Running", score: 87.5, location: "Berlin, DE" },
+  { id: "d7", username: "Leo Messi", sport: "Soccer", score: 86.9, location: "Rosario, AR" },
+  { id: "d8", username: "Chloe Kim", sport: "Snowboard", score: 85.1, location: "Long Beach, CA" },
+  { id: "d9", username: "Tom Brady", sport: "Football", score: 84.5, location: "Tampa, FL" },
+  { id: "d10", username: "Serena W.", sport: "Tennis", score: 83.2, location: "Saginaw, MI" },
+  { id: "d11", username: "Kevin Durant", sport: "Basketball", score: 82.0, location: "Washington, DC" },
 ];
 
 function CoachDashboard() {
@@ -22,148 +29,78 @@ function CoachDashboard() {
       navigate("/signup");
     } else {
       setCoach(storedUser);
-
       const allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
       const realPlayers = allUsers
         .filter(user => user.role === "player")
-        .map(p => ({
-          ...p,
-          score: p.score || Math.floor(Math.random() * (85 - 60 + 1)) + 60,
-          status: "New Entry",
-          trend: "+0.0%"
-        }));
+        .map(p => ({ ...p, score: p.score || 70 }));
 
-      const sortedList = [...realPlayers, ...DUMMY_PLAYERS]
-        .sort((a, b) => b.score - a.score);
-
+      const sortedList = [...realPlayers, ...DUMMY_PLAYERS].sort((a, b) => b.score - a.score);
       setPlayers(sortedList);
     }
   }, [navigate]);
 
-  if (!coach)
-    return <div className="loading-screen">Authenticating Coach Portal...</div>;
+  if (!coach) return <div className="loading-screen">Authenticating...</div>;
+
+  // Logic to get 2nd, 1st, 3rd in that specific order for the flex row
+  const topThree = [players[1], players[0], players[2]];
+  const remainingPlayers = players.slice(3, 11);
 
   return (
-    <div className="coach-dashboard-wrapper">
-
-      {/* HEADER */}
-      <header className="dashboard-header">
-        <div className="coach-profile-section">
-          <img
-            src={
-              coach.profilePic ||
-              "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150"
-            }
-            alt="Coach Profile"
-            className="coach-photo"
-          />
-          <div className="coach-meta">
-            <h1>
-              Coach {coach.username}
-              <span className="verified-badge">✓</span>
-            </h1>
-            <p>{coach.sport} scouting dashboard • Senior Scout</p>
+    <div className="coach-dashboard-container">
+      
+      {/* 1. COACH PROFILE CARD */}
+      <section className="coach-hero-card">
+        <div className="coach-hero-content">
+          <div className="coach-avatar-large">
+             <img src={coach.profilePic || "https://via.placeholder.com/150"} alt="Coach" />
+          </div>
+          <div className="coach-info">
+            <h1>Coach {coach.username}</h1>
+            <p>Expert in {coach.sport} • Scouting & Analysis</p>
           </div>
         </div>
+        <button className="logout-minimal" onClick={() => { localStorage.clear(); navigate("/login"); }}>Logout</button>
+      </section>
 
-        <button
-          className="logout-btn"
-          onClick={() => {
-            localStorage.clear();
-            navigate("/login");
-          }}
-        >
-          Logout
-        </button>
-      </header>
+      <h2 className="section-label">Analysis of Players</h2>
 
-      {/* ===== TOP 3 PERFORMERS (Redesigned) ===== */}
-      <section className="top-three-section">
-        <h2 className="section-title">
-          Elite Performers <span className="blue-dot"></span>
-        </h2>
+      {/* 2. TOP 3 PODIUM SECTION */}
+      <section className="podium-section">
+        {topThree.map((player, index) => {
+          if (!player) return null;
+          // index 0 is actually 2nd place, index 1 is 1st place, index 2 is 3rd place based on our array mapping
+          const rankLabel = index === 1 ? "1st" : index === 0 ? "2nd" : "3rd";
+          const rankClass = index === 1 ? "gold" : index === 0 ? "silver" : "bronze";
 
-        <div className="top-three-grid">
-          {players.slice(0, 3).map((player, index) => (
-            <div className="modern-player-card" key={player.id || index}>
-
-              {/* Cover */}
-              <div className="card-cover">
-                <span className="rank-badge">#{index + 1}</span>
+          return (
+            <div className={`podium-card ${rankClass}`} key={player.id}>
+              {index === 1 && <div className="crown-icon">👑</div>}
+              <div className="player-rank-tag">{rankLabel} Player</div>
+              <h3>{player.username}</h3>
+              <p>{player.sport} • {player.score}%</p>
+              
+              <div className="podium-actions">
+                <button className="btn-analysis">Analysis</button>
+                <button className="btn-invite">Invite</button>
               </div>
-
-              {/* Profile Image */}
-              <div className="profile-img-wrapper">
-                <img
-                  src={
-                    player.profilePic ||
-                    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200"
-                  }
-                  alt="player"
-                />
-              </div>
-
-              {/* Body */}
-              <div className="card-body">
-                <h3>{player.username}</h3>
-                <p className="player-role">
-                  {player.sport} • {player.location || "Global"}
-                </p>
-
-                <div className="score-text">
-                  AI Score: <span>{player.score}%</span>
-                </div>
-
-                <button className="connect-btn">
-                  Analyze Performance
-                </button>
-              </div>
-
             </div>
-          ))}
-        </div>
+          );
+        })}
       </section>
 
-      {/* ===== LEADERBOARD (UNCHANGED) ===== */}
-      <section className="leaderboard-container">
-        <h3 className="section-title">Full Talent Leaderboard</h3>
-        <div className="table-wrapper">
-          <table className="leaderboard-table">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Athlete Name</th>
-                <th>Sport</th>
-                <th>AI Score</th>
-                <th>Status</th>
-                <th className="text-center">Quick Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {players.map((player, index) => (
-                <tr key={player.id || index}>
-                  <td><span className="table-rank">#{index + 1}</span></td>
-                  <td className="name-cell">{player.username}</td>
-                  <td>{player.sport}</td>
-                  <td><span className="score-blue-bold">{player.score}%</span></td>
-                  <td>
-                    <span className={`status-pill ${player.status.toLowerCase().replace(" ", "-")}`}>
-                      {player.status}
-                    </span>
-                  </td>
-                  <td className="actions-cell">
-                    <div className="action-buttons-group">
-                      <button className="row-btn analyze">Analyze</button>
-                      <button className="row-btn invite">Invite</button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <h2 className="section-label">Leaderboard</h2>
 
+      {/* 3. LEADERBOARD GRID SECTION */}
+      <section className="leaderboard-grid">
+        {remainingPlayers.map((player) => (
+          <div className="grid-item-card" key={player.id}>
+            <div className="grid-avatar"></div>
+            <h4>{player.username}</h4>
+            <p>{player.sport}</p>
+            <div className="grid-score">{player.score}%</div>
+          </div>
+        ))}
+      </section>
     </div>
   );
 }
