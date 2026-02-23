@@ -1,136 +1,122 @@
-/* ================================= */
-/* PREMIUM SPORTS NAVBAR */
-/* ================================= */
-
+/* --- Navbar Base --- */
 .navbar {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.4s ease;
+  z-index: 1000;
   width: 100%;
-  padding: 18px 50px;
+}
+
+/* Sticky White Style (Default) */
+.nav-sticky {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 8);
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Transparent Style (For Login Page) */
+.nav-transparent {
+  position: absolute;
+  background: transparent;
+  border: none;
+}
+
+.nav-container {
+  width: 90%;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* Glass Effect */
-  background: rgb(42, 105, 223);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  border-bottom: 2px solid transparent;
-  border-image: linear-gradient(to right, #00c6ff, #ff4b2b);
-  border-image-slice: 1;
-
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* ================================= */
-/* LOGO */
-/* ================================= */
-
-.navbar-logo {
-  font-size: 40px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  background: linear-gradient(to right, #00c6ff,white, #ff4b2b); 
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent;
-  cursor: pointer;
-  transition: 0.3s ease;
+/* --- Logo Styling --- */
+.navbar-logo a {
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
 }
 
-.navbar-logo:hover {
-  transform: scale(1.05);
+.logo-sports {
+  color: #2563eb; /* The vibrant blue from the Login Button */
+  font-style: italic;
 }
 
-/* ================================= */
-/* NAV LINKS */
-/* ================================= */
+.logo-talent {
+  color: #1e293b; /* Deep Slate from Login Headings */
+}
 
+/* --- Navigation Links --- */
 .nav-links {
   display: flex;
   align-items: center;
   gap: 35px;
 }
 
-.nav-links a {
+.nav-item {
   text-decoration: none;
-  color: white;
-  font-size: 16px;
+  color: #0c3a7c !important; /* Muted gray-blue */
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
   position: relative;
-  transition: 0.3s ease;
 }
 
-/* Glow hover effect */
-.nav-links a:hover {
-  color: #00c6ff;
-  text-shadow: 0 0 10px #00c6ff;
+.nav-item:hover {
+  color: #2563eb;
 }
 
-/* Animated underline */
-.nav-links a::after {
-  content: "";
+/* Underline effect on hover */
+.nav-item::after {
+  content: '';
   position: absolute;
-  width: 0%;
+  width: 0;
   height: 2px;
+  bottom: -5px;
   left: 0;
-  bottom: -6px;
-  background: linear-gradient(to right, #00c6ff, #ff4b2b);
+  background-color: #2563eb;
   transition: width 0.3s ease;
 }
 
-.nav-links a:hover::after {
+.nav-item:hover::after {
   width: 100%;
 }
 
-/* ================================= */
-/* ACTIVE LINK */
-/* ================================= */
-
-.active-link {
-  color: #ff4b2b;
-  font-weight: bold;
+/* --- CTA Button (Contrast Element) --- */
+.nav-cta {
+  text-decoration: none;
+  background-color: #2563eb;
+  color: white !important;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.2);
+  transition: all 0.3s ease;
 }
 
-/* ================================= */
-/* CTA BUTTON */
-/* ================================= */
-
-.nav-btn {
-  padding: 10px 22px;
-  border-radius: 25px;
-  border: none;
-  font-size: 14px;
-  cursor: pointer;
-  color: white;
-
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
-  transition: 0.4s ease;
+.nav-cta:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 20px -3px rgba(37, 99, 235, 0.3);
 }
 
-.nav-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 65, 108, 0.5);
+/* Transparent version logo/text color adjust */
+.nav-transparent .logo-talent,
+.nav-transparent .nav-item {
+  color: #1e293b; /* Keep it dark for readability on the white half */
 }
 
-/* ================================= */
-/* MOBILE RESPONSIVE */
-/* ================================= */
-
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-  }
-
   .nav-links {
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 15px;
-    width: 100%;
-  }
-
-  .nav-btn {
-    width: 100%;
-    text-align: center;
+    display: none; /* In a real app, use a hamburger menu here */
   }
 }

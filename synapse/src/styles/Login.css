@@ -1,116 +1,203 @@
-/* Full Page Background with Sports Image */
-.login-container {
-  height: 100vh;
+/* --- Root Layout --- */
+.login-page {
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: url("https://images.unsplash.com/photo-1517649763962-0c623066013b") no-repeat center center/cover;
-  position: relative;
-  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
 }
 
-/* Dark overlay for better readability */
-.login-container::before {
-  content: "";
+/* --- Left Side (Video Container) --- */
+.login-left {
+  flex: 1.2; /* Slightly wider for the visual impact */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 40px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.login-bg-video {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   z-index: 1;
 }
 
-/* Card */
-.login-card {
-  position: relative;
+/* The Blue Tint Overlay */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.8), rgba(30, 64, 175, 0.6));
   z-index: 2;
-  background: rgba(255, 255, 255, 0.95);
+}
+
+.branding-content {
+  position: relative;
+  z-index: 3;
+}
+
+.video-badge {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.branding-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.branding-content p {
+  font-size: 1.2rem;
+  max-width: 450px;
+  margin: 0 auto;
+  opacity: 0.95;
+}
+
+/* --- Right Side (White Form) --- */
+.login-right {
+  flex: 1;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 40px;
-  width: 400px;
-  border-radius: 15px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  animation: slideUp 0.6s ease-in-out;
+  z-index: 10;
 }
 
-/* Heading */
-.login-card h2 {
+.login-form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form-container h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
   margin-bottom: 8px;
-  font-size: 26px;
-  color: #2c5364;
+  color: #1e293b;
 }
 
-.login-card p {
-  margin-bottom: 25px;
-  color: #555;
-  font-size: 14px;
-}
-
-/* Inputs */
-.login-card input {
-  width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 18px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 14px;
-  transition: 0.3s ease;
-}
-
-.login-card input:focus {
-  border-color: #2c5364;
-  box-shadow: 0 0 8px rgba(44, 83, 100, 0.4);
+.input-group input {
+  padding: 14px 18px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
   outline: none;
+  transition: 0.3s;
 }
 
-/* Button */
-.login-card button {
+.input-group input:focus {
+  border-color: #2563eb;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.login-btn {
   width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(45deg, #1e3c72, #2a5298);
+  padding: 15px;
+  background-color: #2563eb;
   color: white;
-  font-size: 15px;
-  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s ease;
+  margin-top: 10px;
+  transition: 0.3s;
 }
 
-.login-card button:hover {
+.login-btn:hover {
+  background-color: #1d4ed8;
   transform: translateY(-2px);
-  opacity: 0.9;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
 }
 
-/* Link */
-.login-card a {
-  color: #1e3c72;
-  font-weight: 600;
+.signup-redirect {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.signup-redirect a {
+  color: #2563eb;
+  font-weight: 700;
   text-decoration: none;
 }
 
-.login-card a:hover {
-  text-decoration: underline;
+/* --- Mobile View --- */
+@media (max-width: 900px) {
+  .login-page { flex-direction: column; }
+  .login-left { min-height: 40vh; }
+  .branding-content h1 { font-size: 2.2rem; }
 }
 
-/* Animation */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.login-left {
+  position: relative;
+  width: 50%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* Responsive */
-@media (max-width: 450px) {
-  .login-card {
-    width: 90%;
-    padding: 30px;
-  }
+.background-gif {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.video-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 50, 0.5);
+  z-index: 1;
+}
+
+.branding-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  padding: 50px;
 }

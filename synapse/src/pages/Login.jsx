@@ -1,31 +1,21 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Login.css";
+import sportsGif from "../assets/new.gif";   // ✅ Import GIF properly
 
 function Login() {
   const navigate = useNavigate();
-
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: ""
-  });
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
-    setLoginData({
-      ...loginData,
-      [e.target.name]: e.target.value
-    });
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });  // ✅ fixed
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
-
     const user = allUsers.find(
-      (u) =>
-        u.email === loginData.email &&
-        u.password === loginData.password
+      (u) => u.email === loginData.email && u.password === loginData.password
     );
 
     if (!user) {
@@ -33,51 +23,74 @@ function Login() {
       return;
     }
 
-    // Save session
     localStorage.setItem("userData", JSON.stringify(user));
     localStorage.setItem("userRole", user.role);
-
     alert("Login Successful 🎉");
 
-    // Role-based navigation
-    if (user.role === "player") {
-      navigate("/player");
-    } else if (user.role === "coach") {
-      navigate("/coach");
-    }
+    if (user.role === "player") navigate("/player");
+    else if (user.role === "coach") navigate("/coach");
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <h2>Login</h2>
-        <p>Welcome Back 👋</p>
+    <div className="login-page">
+      
+      {/* Left Side: Animated GIF Background */}
+      <div className="login-left">
+        <img 
+          src={sportsGif} 
+          alt="sports animation" 
+          className="background-gif" 
+        />
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={loginData.email}
-            onChange={handleChange}
-            required
-          />
+        <div className="video-overlay"></div>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={loginData.password}
-            onChange={handleChange}
-            required
-          />
+        <div className="branding-content">
+          <div className="video-badge">Live Scouting AI</div>
+          <h1>Join the Elite!</h1>
+          <p>
+            Experience the future of sports scouting and performance analytics in your city.
+          </p>
+        </div>
+      </div>
 
-          <button type="submit">Login</button>
-        </form>
+      {/* Right Side: Login Form */}
+      <div className="login-right">
+        <div className="login-form-container">
+          <h2>Log in to your account</h2>
+          <p className="subtitle">Enter your details to get started</p>
 
-        <p>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
-        </p>
+          <form onSubmit={handleSubmit} className="actual-form">
+            <div className="input-group">
+              <label>Email Address</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="name@gmail.com"
+                value={loginData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="••••••"
+                value={loginData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <button type="submit" className="login-btn">Log In</button>
+          </form>
+
+          <p className="signup-redirect">
+            Don't have an account? <Link to="/signup">Sign up</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
