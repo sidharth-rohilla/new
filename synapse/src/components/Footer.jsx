@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Section 1: Brand & Description */}
         <div className="footer-section brand-info">
           <div className="logo">
-            <span className="logo-sports">sports</span>
+            <span className="logo-sports">Bridge</span>
             <span className="logo-talent">Talent</span>
           </div>
           <p className="footer-description">
