@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/talent-map" element={<TalentMap />} />
         <Route path="/profile" element={<PlayerProfile />} />
         <Route path="/results" element={<Results />} />
+        <Route path="/contact" element={<Contact/>}/>
       </Routes>
       <Footer/>
     </Router>

@@ -36,6 +36,7 @@ function Navbar() {
           <Link to="/" className="nav-item" onClick={closeMenu}>Home</Link>
           <Link to="/player" className="nav-item" onClick={closeMenu}>Player</Link>
           <Link to="/coach" className="nav-item" onClick={closeMenu}>Coach</Link>
+          <Link to = "/contact" className="nav-item" onClick={closeMenu}>Contact</Link>
         </div>
       </div>
     </nav>
