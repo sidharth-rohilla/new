@@ -10,6 +10,7 @@ import Results from "./components/Results";
 import Navbar from "./components/Navbar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/profile" element={<PlayerProfile />} />
         <Route path="/results" element={<Results />} />
       </Routes>
+      <Footer/>
     </Router>
   );
 }

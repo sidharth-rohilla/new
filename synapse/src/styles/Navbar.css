@@ -10,7 +10,7 @@
   align-items: center;
 
   /* Glass Effect */
-  background: rgb(0, 0, 0);
+  background: rgb(42, 105, 223);
   position: sticky;
   top: 0;
   z-index: 1000;
