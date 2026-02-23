@@ -150,7 +150,7 @@
 .section-title {
   margin-bottom: 25px;
   font-size: 1.2rem;
-  color: #1e293b;
+  color: #166beb;
 }
 
 .scores-grid {
@@ -216,4 +216,57 @@
 
 .logout-btn:hover {
   background: #fecaca;
+}
+
+.video-upload-section {
+  margin-top: 40px;
+  padding: 25px;
+  background: #111827;
+  border-radius: 16px;
+  color: white;
+}
+
+.upload-desc {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 15px;
+}
+
+.upload-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.file-input {
+  padding: 10px;
+  border-radius: 8px;
+  background: #1f2937;
+  color: white;
+  border: 1px solid #374151;
+}
+
+.video-preview {
+  width: 100%;
+  max-height: 250px;
+  border-radius: 12px;
+}
+
+.upload-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-btn:hover {
+  background: #2563eb;
+}
+
+.upload-status {
+  font-size: 14px;
 }
