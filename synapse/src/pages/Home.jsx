@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Home.css";
 import { Link } from "react-router-dom";
-
+import homeMp4 from "../assets/home.mp4"
 function Home() {
   // Logic to get the user's name
   const user = { isLoggedIn: false, name: "Alex" }; 
@@ -42,7 +42,7 @@ function Home() {
               playsInline 
               className="hero-video"
             >
-              <source src="https://assets.mixkit.co/videos/preview/mixkit-man-playing-basketball-in-the-street-40098-large.mp4" type="video/mp4" />
+              <source src={homeMp4} type="video/mp4" />
             </video>
 
             {/* AI Scanning Overlay Elements */}
