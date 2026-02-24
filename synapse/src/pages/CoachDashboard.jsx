@@ -20,6 +20,7 @@ function CoachDashboard() {
   const navigate = useNavigate();
   const [coach, setCoach] = useState(null);
   const [players, setPlayers] = useState([]);
+  const [selectedPlayer, setSelectedPlayer] = useState(null); // 🔥 MODAL STATE
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
@@ -30,49 +31,67 @@ function CoachDashboard() {
     } else {
       setCoach(storedUser);
       const allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
+
       const realPlayers = allUsers
         .filter(user => user.role === "player")
         .map(p => ({ ...p, score: p.score || 70 }));
 
-      const sortedList = [...realPlayers, ...DUMMY_PLAYERS].sort((a, b) => b.score - a.score);
+      const sortedList = [...realPlayers, ...DUMMY_PLAYERS]
+        .sort((a, b) => b.score - a.score);
+
       setPlayers(sortedList);
     }
   }, [navigate]);
 
   if (!coach) return <div className="loading-screen">Authenticating...</div>;
 
-  // Logic to get 2nd, 1st, 3rd in that specific order for the flex row
   const topThree = [players[1], players[0], players[2]];
   const remainingPlayers = players.slice(3, 11);
 
   return (
     <div className="coach-dashboard-container">
-      
-      {/* 1. COACH PROFILE CARD */}
+
+      {/* COACH PROFILE */}
       <section className="coach-hero-card">
         <div className="coach-hero-content">
           <div className="coach-avatar-large">
-             <img src={coach.profilePic || "https://media.istockphoto.com/id/1225695062/photo/young-indian-businessman-stock-photo.webp?s=1024x1024&w=is&k=20&c=X53Ft4D-x-W0DqsI26IVeBjFTJbhgSKqrSBkavLKhI4="} alt="Coach" />
+            <img
+              src={
+                coach.profilePic ||
+                "https://media.istockphoto.com/id/1225695062/photo/young-indian-businessman-stock-photo.webp?s=1024x1024&w=is&k=20&c=X53Ft4D-x-W0DqsI26IVeBjFTJbhgSKqrSBkavLKhI4="
+              }
+              alt="Coach"
+            />
           </div>
           <div className="coach-info">
             <h1>Coach {coach.username}</h1>
             <p>Expert in {coach.sport} • Scouting & Analysis</p>
           </div>
         </div>
-        <button className="logout-minimal" onClick={() => { localStorage.clear(); navigate("/login"); }}>Logout</button>
+        <button
+          className="logout-minimal"
+          onClick={() => {
+            localStorage.clear();
+            navigate("/login");
+          }}
+        >
+          Logout
+        </button>
       </section>
-      <br />
-      <hr />
-      <br />
+
+      <br /><hr /><br />
+
       <h2 className="section-label">Top Three Performers</h2>
 
-      {/* 2. TOP 3 PODIUM SECTION */}
+      {/* PODIUM */}
       <section className="podium-section">
         {topThree.map((player, index) => {
           if (!player) return null;
-          // index 0 is actually 2nd place, index 1 is 1st place, index 2 is 3rd place based on our array mapping
-          const rankLabel = index === 1 ? "1st" : index === 0 ? "2nd" : "3rd";
-          const rankClass = index === 1 ? "gold" : index === 0 ? "silver" : "bronze";
+
+          const rankLabel =
+            index === 1 ? "1st" : index === 0 ? "2nd" : "3rd";
+          const rankClass =
+            index === 1 ? "gold" : index === 0 ? "silver" : "bronze";
 
           return (
             <div className={`podium-card ${rankClass}`} key={player.id}>
@@ -80,32 +99,94 @@ function CoachDashboard() {
               <div className="player-rank-tag">{rankLabel} Player</div>
               <h3>{player.username}</h3>
               <p>{player.sport} • {player.score}%</p>
-              
+
               <div className="podium-actions">
-                <button className="btn-analysis">Analysis</button>
+                <button
+                  className="btn-analysis"
+                  onClick={() => setSelectedPlayer(player)}
+                >
+                  Analysis
+                </button>
                 <button className="btn-invite">Invite</button>
               </div>
             </div>
           );
         })}
       </section>
-      <br />
-      <hr />
-      <br />
+
+      <br /><hr /><br />
+
       <h2 className="section-label">Leaderboard</h2>
 
-      {/* 3. LEADERBOARD GRID SECTION */}
+      {/* GRID */}
       <section className="leaderboard-grid">
         {remainingPlayers.map((player) => (
           <div className="grid-item-card" key={player.id}>
             <h4>{player.username}</h4>
             <p>{player.sport}</p>
             <div className="grid-score">{player.score}%</div>
-            <button className="btn-analysis">Analysis</button>
+
+            <button
+              className="btn-analysis"
+              onClick={() => setSelectedPlayer(player)}
+            >
+              Analysis
+            </button>
+
             <button className="btn-invite">Invite</button>
           </div>
         ))}
       </section>
+
+      {/* 🔥 ANALYSIS MODAL */}
+      {selectedPlayer && (
+        <div
+          className="modal-overlay"
+          onClick={() => setSelectedPlayer(null)}
+        >
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="modal-close"
+              onClick={() => setSelectedPlayer(null)}
+            >
+              ✖
+            </button>
+
+            <div className="modal-profile">
+              <img
+                src={
+                  selectedPlayer.profilePic ||
+                  "https://via.placeholder.com/150"
+                }
+                alt="Player"
+              />
+              <h2>{selectedPlayer.username}</h2>
+              <p><strong>Sport:</strong> {selectedPlayer.sport}</p>
+              <p><strong>Score:</strong> {selectedPlayer.score}%</p>
+              <p><strong>Location:</strong> {selectedPlayer.location || "N/A"}</p>
+
+              <div className="analysis-stats">
+                <div className="stat-box">
+                  <span>Speed</span>
+                  <strong>{Math.floor(Math.random() * 30 + 70)}%</strong>
+                </div>
+                <div className="stat-box">
+                  <span>Stamina</span>
+                  <strong>{Math.floor(Math.random() * 30 + 70)}%</strong>
+                </div>
+                <div className="stat-box">
+                  <span>Agility</span>
+                  <strong>{Math.floor(Math.random() * 30 + 70)}%</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
